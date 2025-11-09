@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root { 
+  color-scheme: light dark; 
+}
+
+html, body, #root { 
+  height: 100%; 
+  scroll-behavior: smooth;
+}
+
+body { 
+  @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 
+         antialiased font-sans;
+}
+
+/* Modern button styles - mobile first */
+.btn { 
+  @apply inline-flex items-center justify-center 
+         rounded-xl px-4 py-2.5 text-sm font-medium
+         bg-gray-900 text-white 
+         hover:bg-gray-800 active:bg-black active:scale-[0.98]
+         dark:bg-white dark:text-gray-900 
+         dark:hover:bg-gray-200 dark:active:bg-gray-300
+         transition-all duration-200 ease-out
+         focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2
+         dark:focus:ring-white dark:focus:ring-offset-gray-950;
+}
+
+.btn-ghost { 
+  @apply inline-flex items-center rounded-xl px-3 py-2 text-sm
+         hover:bg-gray-100 dark:hover:bg-gray-900 
+         active:scale-[0.98]
+         transition-all duration-200 ease-out
+         focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2
+         dark:focus:ring-white dark:focus:ring-offset-gray-950;
+}
+
+.card { 
+  @apply rounded-2xl border border-gray-200 dark:border-gray-800 
+         p-4 sm:p-6 bg-white dark:bg-gray-900 
+         shadow-sm hover:shadow-lg transition-all duration-300;
+}
+
+.link { 
+  @apply text-sky-600 hover:text-sky-700 hover:underline 
+         dark:text-sky-400 dark:hover:text-sky-300
+         transition-colors duration-200;
+}
