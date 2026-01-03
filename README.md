@@ -1,30 +1,37 @@
 # Agent UI - Modern SPA Framework
 
-A clean, modern single-page application built with React, TypeScript, and Tailwind CSS v4. Mobile-first, accessible, and production-ready.
+A clean, modern single-page application built with React, TypeScript, Tailwind CSS v4, and Bun. Mobile-first, accessible, and production-ready.
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- [Bun](https://bun.sh) (latest version) - Fast all-in-one JavaScript runtime and package manager
+
+To install Bun:
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
 
 ### Installation
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start development server
-npm run dev
+bun run dev
 
 # Build for production
-npm run build
+bun run build
 
 # Preview production build
-npm run preview
+bun run preview
 ```
 
-The app will be available at `http://localhost:5173`
+The app will be available at `http://localhost:3000`
+
+> **Note:** The development server port is configured in `vite.config.ts`. To change it, modify the `server.port` option.
 
 ## 📁 Project Structure
 
@@ -55,7 +62,9 @@ my-agent-ui/
 ├── index.html             # HTML template
 ├── tailwind.config.js     # Tailwind configuration
 ├── postcss.config.js      # PostCSS configuration
-└── vite.config.ts         # Vite configuration
+├── vite.config.ts         # Vite configuration (includes server port)
+├── bun.lock               # Bun lockfile for dependency management
+└── package.json           # Dependencies and scripts
 ```
 
 ## 🎨 How to Modify
@@ -252,21 +261,22 @@ Or add custom animations in `src/index.css`:
 
 ## 🎯 Key Features
 
+- **Bun Runtime**: Fast JavaScript runtime and package manager
 - **Mobile-First Design**: Responsive on all devices
 - **Dark Mode**: System-aware with persistent toggle
 - **SPA Routing**: React Router v7 with lazy loading
 - **TypeScript**: Full type safety
 - **Tailwind CSS v4**: Modern utility-first styling
-- **Vite**: Lightning-fast development
+- **Vite**: Lightning-fast development and HMR
 
 ## 🛠️ Development
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+- `bun run dev` - Start development server
+- `bun run build` - Build for production
+- `bun run preview` - Preview production build
+- `bun run lint` - Run ESLint
 
 ### Code Style
 
@@ -278,7 +288,7 @@ Or add custom animations in `src/index.css`:
 ## 📦 Building for Production
 
 ```bash
-npm run build
+bun run build
 ```
 
 Output will be in the `dist/` directory, ready to deploy to any static hosting service.
@@ -288,15 +298,15 @@ Output will be in the `dist/` directory, ready to deploy to any static hosting s
 ### Vercel
 
 ```bash
-npm install -g vercel
-vercel
+bunx vercel
+# Or install globally: bun install -g vercel
 ```
 
 ### Netlify
 
 ```bash
-npm install -g netlify-cli
-netlify deploy --prod
+bunx netlify deploy --prod
+# Or install globally: bun install -g netlify-cli
 ```
 
 ### GitHub Pages
@@ -311,17 +321,19 @@ export default defineConfig({
 
 2. Build and deploy:
 ```bash
-npm run build
+bun run build
 # Deploy dist/ folder to GitHub Pages
 ```
 
 ## 🔧 Configuration Files
 
-- **`vite.config.ts`**: Vite build configuration
+- **`vite.config.ts`**: Vite build configuration (includes server port: 3000)
 - **`tailwind.config.js`**: Tailwind CSS customization
 - **`postcss.config.js`**: PostCSS plugins
 - **`tsconfig.json`**: TypeScript configuration
 - **`eslint.config.js`**: ESLint rules
+- **`bun.lock`**: Bun lockfile for reproducible installs
+- **`package.json`**: Project dependencies and scripts
 
 ## 📝 Best Practices
 
@@ -345,12 +357,18 @@ npm run build
 - Restart the dev server
 
 ### Build errors
-- Run `npm install` to ensure dependencies are installed
-- Check TypeScript errors with `npm run build`
+- Run `bun install` to ensure dependencies are installed
+- Check TypeScript errors with `bun run build`
 - Verify all imports are correct
+- Clear cache: `rm -rf node_modules bun.lock && bun install`
+
+### Port already in use
+- Change the port in `vite.config.ts` under `server.port`
+- Or kill the process using port 3000: `lsof -ti:3000 | xargs kill -9`
 
 ## 📚 Resources
 
+- [Bun Documentation](https://bun.sh/docs)
 - [React Documentation](https://react.dev)
 - [TypeScript Documentation](https://www.typescriptlang.org)
 - [Tailwind CSS v4](https://tailwindcss.com)

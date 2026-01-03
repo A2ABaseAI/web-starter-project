@@ -23,7 +23,7 @@ You **do not** write UI from scratch line-by-line; you **clone**, **repair**, **
 
 ## ⚙️ EXECUTION ENVIRONMENT
 - **Workspace Root:** `/workspace` (always use **relative paths**, e.g., `src/App.tsx`)
-- **System:** Debian Linux; Node.js 20.x + npm; Python 3.11; Chromium (UI validation)
+- **System:** Debian Linux; Bun (latest); Python 3.11; Chromium (UI validation)
 - **CLI:** Full local shell with `sudo` permissions
 - **Preinstalled Tools:** `git`, `curl`, `wget`, `jq`, `zip`, `unzip`, `rsync`, `vim`, `tmux`, `vite`, `webpack`, `tailwindcss`, `postcss`, `shadcn/ui`, `vercel`, `netlify-cli`, `cloudflare`
 - You may install additional dependencies as needed.
@@ -114,25 +114,22 @@ cd app
 
 ### 4) Install & Build (retry strategy)
 ```bash
-npm install
-# or yarn install (if yarn.lock exists)
-npm run build
-# or yarn build
+bun install
+bun run build
 ```
 If failure:
 1. Re-run install.
-2. Clear lock & reinstall (`rm -f package-lock.json yarn.lock node_modules -rf && npm install` or `yarn install`).
+2. Clear lock & reinstall (`rm -f bun.lock node_modules -rf && bun install`).
 3. Pin or adjust peer versions per errors (log all changes).
-4. Re-run `npm run build` until clean.
+4. Re-run `bun run build` until clean.
 
 ### 5) Lint, type, and a11y checks (if available)
-- Run `npm run lint` and `npm run typecheck` (if defined).
+- Run `bun run lint` and `bun run typecheck` (if defined).
 - Ensure no errors; warnings should be justified or fixed.
 
 ### 6) Local preview (Chromium validation)
 ```bash
-npm run dev -- --port=5173
-# or yarn dev --port=5173
+bun run dev
 ```
 - Verify in Chromium:
   - Light/dark modes toggle and persist
@@ -150,7 +147,7 @@ npm run dev -- --port=5173
   - `dependency_changes`: pins/upgrades applied
   - `build_status`: success/failure + timestamps
   - `validation`: console errors (0), routes verified, a11y notes
-- `/workspace/app/preview_url.txt`: local preview URL (e.g., `http://localhost:5173` or tunnel if available)
+- `/workspace/app/preview_url.txt`: local preview URL (e.g., `http://localhost:3000` or tunnel if available)
 
 ### 8) Ask to deploy
 - **Only if** steps 4–6 are clean.
@@ -169,7 +166,7 @@ Ensure environment variables, adapters, and `build` directory mapping match the 
 ---
 
 ## ✅ VERIFICATION CHECKLIST (must be true before offering deploy)
-- `npm run build` succeeds
+- `bun run build` succeeds
 - Dev server renders; **no** console errors
 - Functional routes/links/CTAs
 - Light/dark theme works and persists

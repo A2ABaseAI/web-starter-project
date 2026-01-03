@@ -7,25 +7,24 @@
 #
 set -euo pipefail
 
-echo "Node: $(node -v)  npm: $(npm -v)"
-node -e "process.version.split('.')[0].slice(1) >= 18 || (console.error('❌ Node 18+ required'), process.exit(1))"
+echo "Bun: $(bun -v)"
 
 # --- 1) Ensure React Router ---
-if ! npm ls react-router-dom >/dev/null 2>&1; then
+if ! bun pm ls react-router-dom >/dev/null 2>&1; then
   echo "📦 Installing react-router-dom..."
-  npm i react-router-dom
+  bun add react-router-dom
 fi
 
 # --- 2) Tailwind (install if missing) ---
 NEED_TW=0
-if ! npm ls tailwindcss >/dev/null 2>&1; then
+if ! bun pm ls tailwindcss >/dev/null 2>&1; then
   NEED_TW=1
 fi
 
 if [ $NEED_TW -eq 1 ]; then
   echo "🎨 Installing TailwindCSS (with postcss + autoprefixer)"
-  npm i -D tailwindcss postcss autoprefixer
-  npx tailwindcss init -p
+  bun add -d tailwindcss postcss autoprefixer
+  bunx tailwindcss init -p
   # Tailwind config
   cat > tailwind.config.js <<'EOF'
 /** @type {import('tailwindcss').Config} */
@@ -452,5 +451,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 EOF
 
 echo "✅ Pages and routing added."
-echo "👉 Restart your dev server: npm run dev"
+echo "👉 Restart your dev server: bun run dev"
 
